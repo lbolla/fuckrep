@@ -1,4 +1,4 @@
-var period = 1000;
+var period = 1000, nretries = 10;
 
 function httpGet(theUrl) {
   var xmlHttp = new XMLHttpRequest();
@@ -7,12 +7,17 @@ function httpGet(theUrl) {
   return xmlHttp.responseText;
 }
 
-function fill(content) {
+function fill(content, n) {
+  if (n === 0) {
+    console.log(content);
+  }
   var a = document.getElementsByClassName('detail-article_body');
   if (a.length > 0) {
     a[0].innerHTML = content;
+  } else if (n < nretries) {
+    setTimeout(function() { fill(content, n + 1) }, period);
   } else {
-    setTimeout(function() { fill(content) }, period);
+    window.alert(content);
   }
 }
 
@@ -21,7 +26,7 @@ function fuckrep() {
   var url = 'https://rep.repubblica.it/ws/detail/' + pathname.substring(5) + 'content.json';
   var data = JSON.parse(httpGet(url));
   var content = data[0].content + '<h2>FuckRep!</h2>';
-  fill(content);
+  fill(content, 0);
 }
 
 fuckrep();
