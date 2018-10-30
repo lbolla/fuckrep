@@ -1,4 +1,4 @@
-var period = 1000, nretries = 10;
+var period = 1000, nretries = 6;
 
 function httpGet(theUrl) {
   var xmlHttp = new XMLHttpRequest();
@@ -8,16 +8,13 @@ function httpGet(theUrl) {
 }
 
 function fill(content, n) {
-  if (n === 0) {
-    console.log(content);
-  }
   var a = document.getElementsByClassName('detail-article_body');
   if (a.length > 0) {
     a[0].innerHTML = content;
   } else if (n < nretries) {
     setTimeout(function() { fill(content, n + 1) }, period);
   } else {
-    window.alert(content);
+    document.body.innerHTML = content;
   }
 }
 
