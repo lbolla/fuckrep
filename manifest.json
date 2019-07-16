@@ -1,13 +1,11 @@
 {
   "manifest_version": 2,
   "name": "FuckRep",
-  "version": "2.4",
+  "version": "2.5",
   "description": "Show content on rep.repubblica.it",
   "content_scripts": [
     {
-      "matches": [
-          "*://rep.repubblica.it/*"
-      ],
+      "matches": ["*://rep.repubblica.it/*"],
       "js": ["fuckrep.js"]
     }
   ]
